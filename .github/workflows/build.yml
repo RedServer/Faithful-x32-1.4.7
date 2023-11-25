@@ -1,0 +1,23 @@
+name: Build ZIP archive
+
+on:
+  push:
+    branches: ['master']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Creating zip archive
+        run: zip -rv9 Faithful-x32-1.4.7.zip *
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: archives
+          path: Faithful-x32-1.4.7.zip
+          if-no-files-found: error
